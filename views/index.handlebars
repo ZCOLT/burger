@@ -3,7 +3,8 @@
 <h2>Burgers to Eat</h2>
 <ul>
   {{#each burgers}}
-    {{#unless devoured}}
+  {{!-- not devoured (left side) want the burgers not devoured to show --}}
+    {{#unless this.devoured}}
         {{> burgers/burger-block devoured=false}}
     {{/unless}}
   {{/each}}
@@ -12,12 +13,8 @@
 <h2>Burgers Eaten</h2>
 <ul>
   {{#each burgers}}
-    {{#if devoured}}
-        {{!-- {{> burgers/burger-block devoured=true}} --}}
-        <form action="">
-            <p>{{burger_name}}</p>
-        <button>remove</button>
-        </form>
+    {{#if this.devoured}}
+        {{> burgers/burger-block devoured=true}}
     {{/if}}
   {{/each}}
 </ul>
@@ -28,7 +25,7 @@
 <form class="create-form">
 
   <div class="form-group">
-    <input type="text" id="ca" name="burger_name">
+    <input type="text" id="brgr" name="burger_name">
   </div>
 
   <button type="submit">Submit</button>
