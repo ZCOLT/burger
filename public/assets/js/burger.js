@@ -2,7 +2,7 @@
 $(function() {
     $(".change-devoured").on("click", function(event) {
       var id = $(this).data("id");
-      var newDevoured = $(this).data("newdevoured");
+      var newDevoured = $(this).attr("data-newdevoured");
   
       var newDevouredState = {
         devoured: newDevoured
@@ -27,7 +27,7 @@ $(function() {
   
       var newBurger = {
         burger_name: $("#brgr").val().trim(),
-        devoured: $("[burger_name=devoured]:checked").val().trim()
+        devoured: 0
       };
   
       // Send the POST request.
@@ -43,19 +43,20 @@ $(function() {
       );
     });
   
-    // $(".delete-cat").on("click", function(event) {
-    //   var id = $(this).data("id");
+    $("#deleteAllBurgers").on("click", function(event) {
+      var id = $(this).data("id");
   
-    //   // Send the DELETE request.
-    //   $.ajax("/api/cats/" + id, {
-    //     type: "DELETE"
-    //   }).then(
-    //     function() {
-    //       console.log("deleted cat", id);
-    //       // Reload the page to get the updated list
-    //       location.reload();
-    //     }
-    //   );
-    // });
+      // Send the DELETE request.
+      $.ajax({
+        url: "/api/burgers",
+        method: "DELETE"
+      }).then(
+        function() {
+          console.log("deleted cat", id);
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+    });
   });
   

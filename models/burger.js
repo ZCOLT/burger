@@ -18,6 +18,9 @@ var burger = {
       cb(res);
     });
   },
+  deleteAllBurgers: function(cb){
+    orm.deleteAll("burgers", cb)
+  }
 };
 
 // Export the database functions for the controller (burgers_controller.js).

@@ -94,6 +94,33 @@ var orm = {
       cb(result);
     });
   },
+  deleteAll: function(tableName, cb){
+    //delete the table
+    //recreate the table
+    //tell the view that our database is good to go again
+    var queryString = "DROP TABLE " + tableName;
+    console.log(queryString);
+    connection.query(queryString, function (err, result) {
+      if (err) {
+        throw err;
+      }
+      var newTable = `CREATE TABLE burgers
+        (
+            id INT NOT NULL AUTO_INCREMENT,
+            burger_name VARCHAR(50) NOT NULL,
+            devoured BOOLEAN DEFAULT false,
+            PRIMARY KEY (id)
+        );`
+        console.log(newTable);
+      connection.query(newTable, function (err, result) {
+        if (err) {
+          throw err;
+        }
+        console.log(result);
+        cb(result);
+      });
+    });
+  }
 };
 
 // Export the orm object for the model (burger.js).
